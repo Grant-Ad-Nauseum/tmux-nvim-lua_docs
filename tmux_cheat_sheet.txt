@@ -1,0 +1,74 @@
+📦 TMUX CHEAT SHEET — Terminal Multiplexer Power Commands
+=========================================================
+
+🔄 START / STOP / RESUME
+------------------------
+tmux                   # Start a new tmux session
+tmux new -s name       # Start a named session
+tmux ls                # List tmux sessions
+tmux attach -t name    # Re-attach to a session
+tmux kill-session -t name  # Kill session by name
+tmux kill-server       # Kill all tmux sessions
+
+🧭 NAVIGATION BASICS (Ctrl + B, then...)
+----------------------------------------
+c          → New window (like a tab)
+,          → Rename current window
+n / p      → Next / Previous window
+&          → Close current window
+0-9        → Switch to window 0–9
+
+🪟 PANE CONTROLS (split screen inside a window)
+-----------------------------------------------
+"          → Split horizontally
+%          → Split vertically
+arrow keys → Move between panes
+x          → Close current pane
+z          → Zoom into pane (toggle)
+!          → Break pane into its own window
+
+↔️ PANE NAVIGATION (better with Vim keys)
+-----------------------------------------
+bind h select-pane -L     # Move left
+bind j select-pane -D     # Move down
+bind k select-pane -U     # Move up
+bind l select-pane -R     # Move right
+
+🖱️ MOUSE + SCROLL
+-------------------
+set -g mouse on           # Enable mouse support in .tmux.conf
+Scroll normally or use Shift+PageUp if needed
+
+💾 FILE: ~/.tmux.conf
+---------------------
+Sample:
+    set -g mouse on
+    bind r source-file ~/.tmux.conf \; display-message "Reloaded!"
+    setw -g mode-keys vi
+    set -g status on
+
+🔁 RELOAD CONFIG
+----------------
+Ctrl + B, then r         # Reload .tmux.conf if configured
+
+🧠 DETACH / RESUME SESSION
+--------------------------
+Ctrl + B, then d         # Detach from tmux (session stays running)
+tmux attach              # Re-attach to last session
+
+🎨 STATUS BAR CUSTOMIZATION (optional)
+-------------------------------------
+Use tmux plugins or configure .tmux.conf for time, hostname, battery, git, etc.
+
+✅ RECOMMENDED KEYBIND CUSTOMIZATIONS
+-------------------------------------
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded"
+
+🧙‍♂️ PRO TIP: Sessions persist even if your terminal is closed.
+---------------------------------------------------------------
+Start a long-running server, detach, close your terminal, go eat ramen 🍜,
+and come back later with `tmux attach`.
