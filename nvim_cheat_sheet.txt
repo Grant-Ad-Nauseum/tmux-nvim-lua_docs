@@ -1,0 +1,95 @@
+📝 NEOVIM CHEAT SHEET — Beginner-Friendly Power Guide
+=====================================================
+
+🚀 STARTING NEOVIM
+------------------
+nvim file.txt         # Open a file
+nvim                  # Open empty buffer
+:help [topic]         # Open built-in help (e.g. :help :w)
+
+🧭 MODES
+---------
+i        → Insert mode (type text)
+<Esc>    → Normal mode (commands)
+v        → Visual mode (select text)
+V        → Line Visual mode
+Ctrl + V → Block Visual mode
+:        → Command-line mode
+
+💾 SAVE & QUIT
+--------------
+:w        → Save file
+:q        → Quit
+:wq       → Save and quit
+:q!       → Quit without saving
+:qa       → Quit all
+ZZ        → Save and quit (shortcut)
+
+🧠 MOVEMENT
+-----------
+h / j / k / l       → Left / Down / Up / Right
+0 / ^ / $           → Line start / first non-space / end
+w / W / b / B       → Forward / backward by word
+gg / G              → Top / bottom of file
+:10                 → Go to line 10
+H / M / L           → Top / Middle / Bottom of screen
+
+🔍 SEARCH & REPLACE
+-------------------
+/pattern            → Search forward
+?pattern            → Search backward
+n / N               → Repeat search forward/backward
+:%s/old/new/g       → Replace all
+:s/old/new/g        → Replace in current line
+
+🛠️ BASIC EDITING
+------------------
+x                  → Delete character
+dd                 → Delete line
+yy                 → Yank (copy) line
+p / P              → Paste after / before
+u / Ctrl + R       → Undo / redo
+>> / <<            → Indent / unindent line
+.                  → Repeat last command
+
+📁 FILE NAVIGATION (if using plugins)
+-------------------------------------
+:Ex                 → Open file explorer
+:Telescope find_files
+:Telescope live_grep
+
+🧩 PLUGINS & COLORS
+--------------------
+:Lazy               → Open Lazy.nvim plugin manager
+:colorscheme name   → Set colorscheme (e.g., gruvbox)
+
+🔧 SETTINGS IN init.lua
+------------------------
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.mouse = "a"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.guifont = "Monaco:h15"
+
+🔀 VS CODE-LIKE KEYBINDS (from your config)
+-------------------------------------------
+Ctrl + S           → Save
+Ctrl + Tab         → Next buffer (like tab)
+Ctrl + Shift + Tab → Previous buffer
+Ctrl + W           → Close buffer
+
+🌈 THEMING
+----------
+:colorscheme gruvbox
+:colorscheme default
+:colorscheme evening
+
+💡 TIPS
+-------
+- Use :checkhealth to debug plugin setup
+- Use :help for any command or keybinding
+- Use vim.keymap.set(...) in init.lua for custom binds
+
+🧙‍♂️ PRO TIP: Spend time in Normal mode — it's your Jedi lightsaber.
+---------------------------------------------------------------------
+Insert is for typing. Normal is for speed.
