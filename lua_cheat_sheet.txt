@@ -1,0 +1,130 @@
+📘 LUA SCRIPTING CHEAT SHEET — Essentials for Neovim and Beyond
+==============================================================
+
+🚀 BASIC SYNTAX
+---------------
+-- This is a comment
+print("Hello, world!")        -- Output to console
+
+🧮 VARIABLES & TYPES
+---------------------
+x = 10                       -- Number
+name = "Grant"              -- String
+flag = true                 -- Boolean
+list = {1, 2, 3}            -- Table (array/dictionary)
+
+👀 CONTROL FLOW
+---------------
+if x > 5 then
+  print("greater than 5")
+elseif x == 5 then
+  print("is 5")
+else
+  print("less than 5")
+end
+
+for i = 1, 5 do
+  print(i)
+end
+
+while x > 0 do
+  print(x)
+  x = x - 1
+end
+
+function greet(name)
+  print("Hello, " .. name)
+end
+
+greet("Grant")
+
+🧰 TABLES (KEY-VALUE / ARRAYS)
+------------------------------
+person = {
+  name = "Grant",
+  age = 25
+}
+print(person.name)
+
+fruits = {"apple", "banana", "cherry"}
+print(fruits[2])             -- Indexing starts at 1
+
+🔁 ITERATION
+-------------
+for key, value in pairs(person) do
+  print(key, value)
+end
+
+for i, fruit in ipairs(fruits) do
+  print(i, fruit)
+end
+
+📦 MODULES / REQUIRE
+---------------------
+-- In Neovim:
+local M = {}
+function M.say_hi()
+  print("Hi from a module!")
+end
+return M
+
+-- Load with:
+local mymod = require("mymodule")
+mymod.say_hi()
+
+🔧 FUNCTIONS
+------------
+function add(a, b)
+  return a + b
+end
+
+print(add(3, 4))
+
+-- Anonymous function
+square = function(x) return x * x end
+print(square(5))
+
+🎯 METATABLES (ADVANCED)
+-------------------------
+mt = {
+  __add = function(a, b)
+    return {value = a.value + b.value}
+  end
+}
+
+a = {value = 10}
+b = {value = 20}
+setmetatable(a, mt)
+setmetatable(b, mt)
+
+result = a + b
+print(result.value)  -- 30
+
+🔍 COMMON LIBRARIES
+--------------------
+math.abs(-5)           -- 5
+math.random(1, 10)     -- random number
+string.upper("lua")    -- "LUA"
+table.insert(fruits, "grape")
+
+🎮 NEOVIM INTEGRATION (init.lua)
+---------------------------------
+vim.cmd("colorscheme gruvbox")
+vim.opt.number = true
+vim.keymap.set("n", "<C-s>", ":w<CR>")
+
+🧪 DEBUGGING
+-------------
+print("Debug info")
+vim.inspect(table)       -- Pretty print tables in Neovim
+
+🧠 TIPS
+--------
+- Strings are concatenated with ".."
+- Indexing starts at 1, not 0
+- Use `require()` to split code into modules
+- Use `vim.inspect()` to explore data in Neovim configs
+
+🌟 PRO TIP: Lua in Neovim gives you full control over UI, plugins, keybinds & more.
+----------------------------------------------------------------------------------
+Use it to build your dream editor.
