@@ -69,6 +69,3 @@ bind l select-pane -R
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded"
 
 🧙‍♂️ PRO TIP: Sessions persist even if your terminal is closed.
----------------------------------------------------------------
-Start a long-running server, detach, close your terminal, go eat ramen 🍜,
-and come back later with `tmux attach`.
