@@ -1,0 +1,160 @@
+🔧 NEOVIM LUA PLUGIN DEVELOPMENT CHEAT SHEET
+===========================================
+
+🧠 WHAT IS A PLUGIN?
+---------------------
+A plugin is a Lua module placed in your `~/.config/nvim/lua/` directory (or installed as a package) 
+that provides functions, keymaps, autocommands, and integrations.
+
+🧱 BASIC PLUGIN STRUCTURE
+--------------------------
+~/.config/nvim/lua/myplugin/init.lua
+
+```lua
+local M = {}
+
+function M.say_hello()
+  print("Hello from myplugin!")
+end
+
+return M
+```
+
+🧩 LOADING YOUR PLUGIN
+-----------------------
+```lua
+local myplugin = require("myplugin")
+myplugin.say_hello()
+```
+
+🎯 ADDING COMMANDS
+-------------------
+```lua
+vim.api.nvim_create_user_command("HelloWorld", function()
+  print("Hello from command!")
+end, {})
+```
+
+🗝️ ADDING KEYBINDINGS
+-----------------------
+```lua
+vim.keymap.set("n", "<leader>h", function()
+  print("Shortcut from plugin")
+end, { desc = "Say Hello" })
+```
+
+🔁 AUTOCOMMANDS
+----------------
+```lua
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.lua",
+  callback = function()
+    print("You saved a Lua file!")
+  end,
+})
+```
+
+📦 USING A SETUP FUNCTION
+--------------------------
+```lua
+local M = {}
+
+function M.setup(opts)
+  M.config = opts or {}
+  print("Plugin loaded with options")
+end
+
+return M
+```
+
+Load it in `init.lua`:
+```lua
+require("myplugin").setup({
+  message = "Yo Grant!"
+})
+```
+
+🔌 PLUGIN FILE STRUCTURE
+-------------------------
+~/.config/nvim/lua/myplugin/
+├── init.lua        → main entry point
+├── config.lua      → config defaults
+├── commands.lua    → user commands
+├── mappings.lua    → keybindings
+
+You can `require("myplugin.commands")` from inside `init.lua`.
+
+🧪 TESTING YOUR PLUGIN
+-----------------------
+1. Open Neovim
+2. Run:
+   ```lua
+   :lua require("myplugin").say_hello()
+   ```
+3. Watch the result
+
+🌈 OPTIONAL: DISPLAY WITH NOTIFY (popup messages)
+-------------------------------------------------
+```lua
+vim.notify("This is a message!", vim.log.levels.INFO)
+```
+
+📁 INSTALLING AS A REAL PLUGIN
+-------------------------------
+If you're ready to publish:
+1. Create a GitHub repo with your plugin files
+2. Add a `README.md`, `LICENSE`, and optionally `doc/`
+3. Install via `lazy.nvim`, `packer`, etc.
+
+Example lazy.nvim:
+```lua
+{
+  "grantnvim/myplugin",
+  config = function()
+    require("myplugin").setup()
+  end
+}
+```
+
+📌 NAMING CONVENTION
+---------------------
+- Use `snake_case` for file/module names
+- Use `camelCase` or `PascalCase` for keys and functions
+
+📦 RECOMMENDED APIS
+--------------------
+- `vim.api.nvim_set_keymap` / `vim.keymap.set`
+- `vim.api.nvim_create_autocmd`
+- `vim.api.nvim_create_user_command`
+- `vim.notify`
+- `vim.inspect`
+- `vim.fn`, `vim.loop`, `vim.ui`
+
+🧙‍♂️ TIPS FOR AWESOME PLUGINS
+-------------------------------
+- Wrap all setup logic in `setup(opts)`
+- Use `opts = opts or {}` to make it flexible
+- Add `desc` to keymaps for which-key support
+- Print errors with `vim.notify(err, vim.log.levels.ERROR)`
+- Provide default config via `config.lua`
+
+🎯 EXAMPLE: SIMPLE GREETER PLUGIN
+---------------------------------
+~/.config/nvim/lua/greeter/init.lua
+```lua
+local M = {}
+
+function M.setup(opts)
+  local name = opts and opts.name or "friend"
+  vim.api.nvim_create_user_command("Greet", function()
+    print("Hello, " .. name .. "!")
+  end, {})
+end
+
+return M
+```
+
+Use it in `init.lua`:
+```lua
+require("greeter").setup({ name = "Grant" })
+```
